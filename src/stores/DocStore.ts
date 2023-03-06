@@ -34,8 +34,6 @@ export const useDocStore = defineStore("DocStore", () => {
         })
         let result = await response.json();
         data.value = result.filter((item: { fileTypeName: string; }) => item.fileTypeName == "Удостоверение личности")[0];
-        console.log(data.value);
-
     }
 
     async function uploadData() {

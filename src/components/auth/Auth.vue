@@ -1,18 +1,14 @@
 <script setup lang="ts">
 import { useAuthStore } from "../../stores/AuthStore"
-const AuthStore = useAuthStore();
-
-
-
+    const AuthStore = useAuthStore();
 </script>
 
 <template>
     <div class="auth-wrapper">
-
         <img src="https://www.halyklife.kz/themes/halyk/assets/images/svg/logo.svg" alt="halyk-life">
         <form @submit.prevent="AuthStore.auth" class="auth-form">
-            <input type="text" placeholder="Логин" v-model="AuthStore.login">
-            <input type="password" placeholder="Пароль" v-model="AuthStore.password">
+            <input required type="text" placeholder="Логин" v-model="AuthStore.login">
+            <input required type="password" placeholder="Пароль" v-model="AuthStore.password">
             <button type="submit">Вход в систему</button>
         </form>
     </div>
@@ -44,6 +40,7 @@ const AuthStore = useAuthStore();
     margin-bottom: 24px;
     font-weight: 500;
     font-size: 16px;
+    border: 1px solid black;
 }
 
 
