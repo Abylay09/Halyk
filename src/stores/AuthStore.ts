@@ -34,15 +34,13 @@ export const useAuthStore = defineStore("AuthStore", {
                 let result = await response.json();
                 localStorage.setItem("accessToken", result.accessToken)
                 localStorage.setItem("refreshToken", result.refreshToken)
+                this.login = "";
+                this.password = "";
                 router.push("/document")
 
             } else {
                 this.showError = true;
             }
-        },
-
-        getters: {
-            changedPswd: (state: { password: string; }) => state.password.split("").map((ch) => (ch = "*")).join("")
         },
 
         closeError() {
