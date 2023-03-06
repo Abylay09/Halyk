@@ -1,53 +1,63 @@
 
 <script setup  lang="ts">
 import { useDocStore } from '@/stores/DocStore';
-    const DocStore = useDocStore();
-    DocStore.getData();
+const DocStore = useDocStore();
+DocStore.getData();
+
+
+
 </script>
 
 <template>
     <div class="document-wrapper">
-        <p class="document-header">Наименование</p>
-        <div class="document">
-            <p class="document-name">{{ DocStore.data?.fileTypeName }}</p>
-            <div class="img-block">
-                <img src="https://www.svgrepo.com/show/479481/trash-can.svg" alt="can">
-            </div>
-        </div>
-        <div class="file-block">
-            <div class="file-info">
-                <div class="icon"></div>
-                <!-- <img class="file-img" src="https://cdn-icons-png.flaticon.com/128/8450/8450927.png" alt="file"> -->
-                <span>{{ DocStore.data?.fileName }}</span>
-            </div>
-            <input type="file" class="file-input">
-            <div class="file-bottom">
-                <span>0 / 6MB</span>
 
-                <div class="file-bottom__btns">
-                    <button @click="DocStore.uploadData" class="upload-btn">
-                        <img src="https://cdn-icons-png.flaticon.com/128/7989/7989048.png" alt="">
-                        <span>Вложить</span>
-                    </button>
+        <div class="doc" v-for="document in DocStore.data" :key="document.id">
+            <p class="document-header">Наименование</p>
+            <div class="document">
+                <p class="document-name">{{ document.fileTypeName }}</p>
+                <div class="img-block">
+                    <img src="https://www.svgrepo.com/show/479481/trash-can.svg" alt="can">
+                </div>
+            </div>
+            <div class="file-block">
+                <div class="file-info">
+                    <div class="icon"></div>
+                    <!-- <img class="file-img" src="https://cdn-icons-png.flaticon.com/128/8450/8450927.png" alt="file"> -->
+                <span>{{ document.fileName }}</span>
+            </div>
+                <input type="file" class="file-input" @change="DocStore.sendData">
+                <div class="file-bottom">
+                    <span>0 / 6MB</span>
 
-                    <button @click="DocStore.sendData">
-                        Отправить
-                    </button>
+                    <div class="file-bottom__btns">
+                        <button @click="DocStore.uploadData" class="upload-btn">
+                            <img src="https://cdn-icons-png.flaticon.com/128/7989/7989048.png" alt="">
+                            <span>Вложить</span>
+                        </button>
+
+                        <!-- <button @click="DocStore.sendData">
+                                        Отправить
+                                    </button> -->
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
 </template>
 
 <style scoped>
 .document-wrapper {
     color: black;
+    width: 100%;
+}
+
+.doc {
+    width: 500px;
     background-color: #fff;
-    width: 40%;
     padding: 25px 12px;
-    margin-top: 12%;
-    margin-left: 50%;
-    transform: translate(-50%, -12%);
+    margin: 0 auto 20px;
+
 }
 
 .document-header {

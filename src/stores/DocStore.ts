@@ -33,18 +33,24 @@ export const useDocStore = defineStore("DocStore", () => {
             })
         })
         let result = await response.json();
-        data.value = result.filter((item: { fileTypeName: string; }) => item.fileTypeName == "Удостоверение личности")[0];
+        data.value = result;
+        console.log(data.value);
+
+        // data.value = result.filter((item: { fileTypeName: string; }) => item.fileTypeName == "Удостоверение личности")[0];
     }
 
     async function uploadData() {
         let fileInput = document.querySelector<any>(".file-input");
         fileInput.click();
+        // fileInput?.addEventListener("change", uploadData)
+        
     }
 
     async function sendData() {
         let fileInput = document.querySelector<any>(".file-input");
         let formData = new FormData();
 
+        // fileInput.click();
         formData.append("file", fileInput.files[0]);
         let file = formData.get("file");
         let fileName;
@@ -71,6 +77,7 @@ export const useDocStore = defineStore("DocStore", () => {
             });
             if (response.ok) {
                 alert("Данные загружены")
+                formData.delete("file")
             }
         } catch (error) {
             alert(error)
